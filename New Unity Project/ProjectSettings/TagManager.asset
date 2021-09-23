@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Clickable
   - Vault
+  - Level
   layers:
   - Default
   - TransparentFX

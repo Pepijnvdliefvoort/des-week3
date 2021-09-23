@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class CameraMovement : MonoBehaviour {
     Vector2 input;
@@ -37,8 +35,9 @@ public class CameraMovement : MonoBehaviour {
             }
 
             if (hit.transform.tag == "Vault") {
-                if (inventory.Count >= 3) {
+                if (inventory.Count >= 6) {
                     Debug.Log("open");
+                    // TODO: Open vault
                 }
             }
         }
@@ -48,13 +47,13 @@ public class CameraMovement : MonoBehaviour {
         Vector3 Xaxis = input.x * transform.right;
         Vector3 Yaxis = input.y * transform.forward;
 
-        transform.Rotate(new Vector3(0, input.x / 2, 0));
+        transform.Rotate(new Vector3(0, input.x * Time.deltaTime * (Speed * 10), 0));
 
         Vector3 direction = (Xaxis + Yaxis).normalized * Time.deltaTime * Speed;
 
         Ray ray = new Ray(transform.position, transform.forward);
         if (!Physics.Raycast(ray, 1)) {
-            transform.position += Yaxis / 25;
+            transform.position += Yaxis * Time.deltaTime * Speed;
         }
     }
 }
