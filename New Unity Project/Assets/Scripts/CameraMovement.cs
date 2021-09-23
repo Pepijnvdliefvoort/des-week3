@@ -33,6 +33,13 @@ public class CameraMovement : MonoBehaviour {
             if (hit.transform.tag == "Clickable") {
                 inventory.Add(hit.transform.gameObject);
                 Destroy(hit.transform.gameObject);
+                return;
+            }
+
+            if (hit.transform.tag == "Vault") {
+                if (inventory.Count >= 3) {
+                    Debug.Log("open");
+                }
             }
         }
     }
@@ -47,7 +54,7 @@ public class CameraMovement : MonoBehaviour {
 
         Ray ray = new Ray(transform.position, transform.forward);
         if (!Physics.Raycast(ray, 1)) {
-            transform.position += direction;
+            transform.position += Yaxis / 25;
         }
     }
 }
